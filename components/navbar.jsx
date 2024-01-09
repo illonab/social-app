@@ -2,7 +2,7 @@
 
 import { Button, Navbar } from 'flowbite-react';
 
-function Component() {
+function DisplayNavbar() {
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://flowbite-react.com">
@@ -26,7 +26,7 @@ function Component() {
   );
 }
 
-
+export default DisplayNavbar
 // // Nav bar
 // const NavBar = () => {
 //     return (
