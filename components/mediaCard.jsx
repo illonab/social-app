@@ -1,6 +1,6 @@
 // Displaying the user post
-"use client"
-import { Card } from "flowbite-react";
+"use client";
+
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
