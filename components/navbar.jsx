@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
@@ -36,24 +37,28 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className='hidden md:flex space-x-2'>
       <li key={1}>
-  <button
-    type="button"
-    className='rounded-full px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm whitespace-nowrap'
-    onClick={handleViewPostsClick}
-  >
-    View Posts
-  </button>
+      <Link href="/">
+        <button
+            type="button"
+            className='rounded-full px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm whitespace-nowrap'
+            onClick={handleViewPostsClick}
+          >
+            View Posts
+          </button>
+      </Link>
 </li>
 
 {/* "Add a Post" button for desktop */}
 <li key={2}>
-  <button
-    type="button"
-    className='rounded-full px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm whitespace-nowrap'
-    onClick={handleAddPostClick}
-  >
-    Add a Post
-  </button>
+  <Link href='/add' >
+    <button
+      type="button"
+      className='rounded-full px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm whitespace-nowrap'
+      onClick={handleAddPostClick}
+    >
+      Add a Post
+    </button>
+  </Link>
 </li>
       </ul>
 

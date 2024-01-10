@@ -1,9 +1,61 @@
+'use client';
+
+import { useState } from "react";
+
 // Page layout for adding post
 const AddPostCard = () => {
+   // const [posts, setPosts] = useState([]);
+
+    // const [postObj, setPostObj] = useState({
+    //     "user": "",
+    //     "text": "",
+    //     "images": "",
+    //     "likes": 0,
+    // });
+
+    // Where we store user information. setPostObj is a function that resets postObj;
+    const [postObj, setPostObj] = useState({});
+
+    // When a user interacts with the page. The postObj gets updated with whatever value they inputted -> onChange
+    const handleInput = (event) => {
+        setPostObj({...postObj, [event.target.name]: event.target.value});
+    }
+    
+    // Deals with adding post to local storage
+    const handleAddPost = (event) => {
+        // Prevents the page from re-rendering (Error handling)
+        event.preventDefault();
+
+        // Checks that the post has both a username and text/message
+        if (!postObj.username || !postObj.text) {
+            // If not it returns (Doesn't add to local)
+            return;
+        }
+
+        // Getting the data from the local storage
+        const existingPosts = JSON.parse(localStorage.getItem('posts')); // Posts is the name of the key in the local storage. So we can access
+
+        // Error Handling: If there is no 'posts' in local storage, nothing will happen
+        if (!existingPosts) {
+            return;
+        }
+        
+        // Resets the PostObj, with the updated data (Line 20)
+        setPostObj(() => { 
+            // Returns the back to postObj + with the Likes Key and 0 Value
+            return {...postObj, likes: 0}
+        });
+
+        // Concats the existing post with the new post
+        const posts = [...existingPosts, postObj];
+
+        // Update Local storage with the existing and new post
+        localStorage.setItem('posts', JSON.stringify(posts));
+    }
 
     return (
         <div className="border-2 border-black w-2/4 h-2/4 rounded-lg p-4">
-            <form className="flex flex-col items-center justify-center gap-4">
+            <form onSubmit={handleAddPost} className="flex flex-col items-center justify-center gap-4">
                 {/* User Id */}
                 <div className=" w-full h-24 flex">
                     <div  className="flex items-center justify-center w-1/6">
@@ -13,7 +65,7 @@ const AddPostCard = () => {
                         </svg>
                     </div>  
                     </div>
-                    <input class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md' placeholder='Enter your username' name="user"/>
+                    <input onChange={handleInput} class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md' placeholder='Enter your username' name="username"/>
                 </div>
 
                 {/* Text */}
@@ -21,7 +73,7 @@ const AddPostCard = () => {
                     <div className="flex items-center justify-center w-1/6">
                         <h2 className='font-bold'>Text: </h2>
                     </div>
-                    <input class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md'  type="textarea" placeholder='Add your message' name="message" />
+                    <input onChange={handleInput} class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md'  type="textarea" placeholder='Add your message' name="text" />
                 </div>
 
                 {/* Images */}
@@ -29,7 +81,7 @@ const AddPostCard = () => {
                     <div className="flex items-center justify-center w-1/6">
                         <h2 className='font-bold'>Link: </h2>
                     </div>
-                    <input class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4' placeholder='Add Image Link' name="images" />
+                    <input onChange={handleInput} class='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4' placeholder='Add Image Link' name="images" />
                 </div>
 
                 {/* Submit Button */}
