@@ -1,5 +1,6 @@
-// User adding Username, Text and Image
+// Page layout for adding post
 const AddPostCard = () => {
+
     return (
         <></>
     )
