@@ -6,5 +6,5 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
-  plugins: [require("flowbite/plugin")],
+  plugins: [],
 };
