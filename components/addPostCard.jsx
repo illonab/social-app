@@ -21,9 +21,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     const getLocalPosts = () => {
         const existingPosts = JSON.parse(localStorage.getItem("posts"));
 
-        const postWithHashtag = { ...postObj, hashtag: `#${postObj.hashtag} ${postObj.text}` };
-
-        return [postWithHashtag, ...existingPosts];
+        return [postObj, ...existingPosts];
     };
 
     // Add post to local storage
