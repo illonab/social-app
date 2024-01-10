@@ -1,6 +1,4 @@
-'use client';
-
-// Page layout for adding post
+// User adding Username, Text and Image
 const AddPostCard = () => {
 
     return (
