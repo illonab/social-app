@@ -3,6 +3,7 @@
 import AddPostNotification from "../../components/AddPostNotification";
 import AddPostCard from "../../components/addPostCard";
 
+
 // Page layout for adding post
 const AddPostPage = () => {
     return (
