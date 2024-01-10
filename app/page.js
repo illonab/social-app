@@ -28,6 +28,17 @@ export default function Home() {
   };
 
   return (
-    <></>
-  )
+    <main className="flex justify-center w-screen py-20">
+      {posts.map((post, index) => {
+        return (
+          <MediaCard
+            post={post}
+            index={index}
+            key={index}
+            onUpdatePost={onUpdatePost}
+          />
+        );
+      })}
+    </main>
+  );
 }
