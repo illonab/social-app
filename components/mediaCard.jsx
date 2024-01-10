@@ -1,6 +1,5 @@
 // Displaying the user post
-"use client";
-
+"use client"
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
