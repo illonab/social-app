@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
+import Link from 'next/link';
 
 const MediaCard = ({post, onUpdatePost, index}) => {
 
@@ -39,8 +40,11 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                         <p className="ml-2">{post.likes}</p>
                     </div>
                     <div className="flex">
+                        <Link href="/comments">
                         <p>0</p>
                         <p className="ml-2">Comments</p>
+                        </Link>
+                        
                     </div>
                 </div>
             </div>

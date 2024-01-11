@@ -36,7 +36,7 @@ const CommentPage = () => {
       {/* Add New Comment Form */}
       <div>
         <h2 className="text-lg font-semibold mb-2">Add a New Comment:</h2>
-        <form className="flex items-center">
+        <form className="flex items-center" onSubmit={onAddComment}>
           <input
             type="text"
             value={newComment}
