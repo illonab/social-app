@@ -4,20 +4,15 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
+import Link from "next/link";
 
 const MediaCard = ({post, onUpdatePost, index}) => {
-
     const onChangeLike = (e) => {
-        console.log("clicked")
-
         post.likes = post.likes + 1;
-
         onUpdatePost(post, index)
     }
 
-
     return (
-  
         <article className=" rounded-lg border border-gray-200 bg-white shadow-md  max-w-lg">
             <div className="flex items-center p-6">
                 <p>{post.username}</p>
@@ -25,7 +20,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
 
             </div>
 
-            <img class="rounded-t-lg" src={post.image} alt="card image" loading="lazy" width="500" height="500"/>
+            <img className="rounded-t-lg" src={post.image} alt="card image" loading="lazy" width="500" height="500"/>
 
             <div className="flex flex-col justify-center gap-4 p-6">
                 <p className="font-normal text-gray-700 dark:text-gray-400">
@@ -40,9 +35,13 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                     </div>
                     <div className="flex">
                         <p>0</p>
-                        <p className="ml-2">Comments</p>
+                        <Link href='/comments'>
+                            <p className="ml-2">Comments</p>
+                        </Link>
                     </div>
                 </div>
+              
+                <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
             </div>
         </article>
 
