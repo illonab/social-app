@@ -13,6 +13,9 @@ export default function Home() {
     },
   ]);
 
+  // Add uid number to local storage
+  localStorage.setItem("id", 2);
+
   const [searchValue, setSearchValue] = useState("");
 
   const handleSearchValue = (e) => {

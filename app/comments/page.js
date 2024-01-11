@@ -6,7 +6,6 @@ import MediaCard from "/components/MediaCard"
 const CommentPage = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-
   const onAddComment = () => {
     if (newComment.trim() !== '') {
       const updatedComments = [...comments, newComment];
@@ -14,11 +13,9 @@ const CommentPage = () => {
       setNewComment('');
     }
   };
-
   return (
     <div className="container mx-auto mt-8 p-4">
       <header className="text-2xl font-bold mb-4">Comment Page</header>
-
       {/* Existing Comments Section */}
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Existing Comments:</h2>
@@ -32,7 +29,6 @@ const CommentPage = () => {
           <p>No comments yet.</p>
         )}
       </div>
-
       {/* Add New Comment Form */}
       <div>
         <h2 className="text-lg font-semibold mb-2">Add a New Comment:</h2>
@@ -53,10 +49,8 @@ const CommentPage = () => {
           </button>
         </form>
       </div>
-
       {/* Comment Component */}
       <Comment comments={comments} onUpdatePost={() => {}} />
-
     </div>
   );
 };

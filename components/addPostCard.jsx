@@ -3,6 +3,7 @@ import { useState } from "react";
 // Page layout for adding post
 const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     const [postObj, setPostObj] = useState({
+        uid: 1,
         username: '',
         text: '',
         likes: 0,
@@ -25,7 +26,14 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
 
         }
 
-        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" ")}, ...existingPosts]
+        // Get UID
+        const getUid = JSON.parse(localStorage.getItem('id')) || 0;
+        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), uid: getUid }, ...existingPosts]
+
+        // Update UID
+        const updateUid = getUid + 1;
+        localStorage.setItem('id', updateUid);
+
 
         return allPosts;
     };
