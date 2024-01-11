@@ -66,13 +66,23 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
 
 
     return (
-        <div className="container mx-auto">
-            <div className="lg:w-4/12 pb-10 pt-5 w-full p-4 flex flex-wrap justify-center shadow-2xl my-20 rounded-md mx-auto">
-                <div className="pb-5">
-                    <h1 className="text-3xl text-center font-bold">Add Yours</h1>
-                    <p className="text-center text-xl">
-                        Add your book review, favorite quote, etc.
-                    </p>
+
+<div className="container mx-auto">
+        <div className="lg:w-4/12 pb-10 pt-5 w-full p-4 flex flex-wrap justify-center shadow-2xl my-20 rounded-md mx-auto">
+            <div className="pb-5">
+                <h1 className="text-3xl text-center font-bold">Add Yours</h1>
+                <p className="text-center text-xl">Add your book review favourite quote etc</p>
+            </div>
+            <form onSubmit={handleAddPost} className="flex flex-col justify-start items-center w-full m-auto">
+
+                {/* User Id */}
+                <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+                    <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
+                        <label className="font-semibold">Username</label>
+                        <div className="flex items-center">
+                            <input onChange={handleInput} className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-red-500 md:w-full" type="text" placeholder="Enter your username" name="username" />
+                        </div>
+                    </div>
                 </div>
                 <form
                     onSubmit={handleAddPost}
