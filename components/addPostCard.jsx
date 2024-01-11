@@ -74,20 +74,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                 <p className="text-center text-xl">Add your book review favourite quote etc</p>
             </div>
             <form onSubmit={handleAddPost} className="flex flex-col justify-start items-center w-full m-auto">
-
-                {/* User Id */}
-                <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
-                    <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
-                        <label className="font-semibold">Username</label>
-                        <div className="flex items-center">
-                            <input onChange={handleInput} className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-red-500 md:w-full" type="text" placeholder="Enter your username" name="username" />
-                        </div>
-                    </div>
-                </div>
-                <form
-                    onSubmit={handleAddPost}
-                    className="flex flex-col justify-start items-center w-full m-auto"
-                >
+    
                     {/* User Id */}
                     <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
                         <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
