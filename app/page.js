@@ -8,7 +8,7 @@ export default function Home() {
       username: "Alex",
       text: "Cats, known for their graceful agility and independent demeanor, have captivated humans for centuries with their mysterious charm. From their soothing purrs to playful antics, these enigmatic feline companions continue to be beloved members of households worldwide.",
       image: "http://placekitten.com/500/500",
-      hashtags: ["#cats", "#lovacats"],
+      hashtag: ["#cats", "#lovacats"],
       likes: 0,
     },
   ]);
@@ -19,36 +19,26 @@ export default function Home() {
     setSearchValue(e.target.value);
   };
 
-  /**
-   * Posts is an array of objects. Each post is object with following fields:
-   * image
-   * text
-   * username
-   * likes
-   */
-
   const onUpdatePost = (updatedPost, index) => {
     const newPosts = [...posts];
     newPosts[index] = updatedPost;
     setPosts(newPosts);
-
     localStorage.setItem("posts", JSON.stringify(newPosts));
   };
 
   useEffect(() => {
-    const posts = JSON.parse(localStorage.getItem("posts"));
-    if (!posts) return;
-
-    setPosts(posts);
+    const newPosts = JSON.parse(localStorage.getItem("posts"));
+    if (newPosts){
+      setPosts(newPosts);
+    } return;
   }, []);
 
-  let postsTorender = posts;
-
+  let postsToRender = posts;
   if (searchValue !== "") {
     const filteredPosts = posts.filter((post) => {
-      return post.hashtags.includes(searchValue);
+      return post.hashtag ? post.hashtag.includes(searchValue) : null;
     });
-    postsTorender = filteredPosts;
+    postsToRender = filteredPosts;
   }
 
   return (
@@ -65,7 +55,7 @@ export default function Home() {
         />
       </div>
 
-      {postsTorender.map((post, index) => {
+      {postsToRender.map((post, index) => {
         return (
           <MediaCard
             post={post}
