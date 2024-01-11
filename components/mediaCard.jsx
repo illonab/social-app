@@ -6,18 +6,12 @@ import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
 
 const MediaCard = ({post, onUpdatePost, index}) => {
-
     const onChangeLike = (e) => {
-        console.log("clicked")
-
         post.likes = post.likes + 1;
-
         onUpdatePost(post, index)
     }
 
-
     return (
-  
         <article className=" rounded-lg border border-gray-200 bg-white shadow-md  max-w-lg">
             <div className="flex items-center p-6">
                 <p>{post.username}</p>
@@ -43,7 +37,8 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                         <p className="ml-2">Comments</p>
                     </div>
                 </div>
-                <p>{post.hashtags.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
+              
+                <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
             </div>
         </article>
 

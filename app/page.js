@@ -8,7 +8,7 @@ export default function Home() {
       username: "Alex",
       text: "Cats, known for their graceful agility and independent demeanor, have captivated humans for centuries with their mysterious charm. From their soothing purrs to playful antics, these enigmatic feline companions continue to be beloved members of households worldwide.",
       image: "http://placekitten.com/500/500",
-      hashtags: ["#cats", "#lovacats"],
+      hashtag: ["#cats", "#lovacats"],
       likes: 0,
     },
   ]);
@@ -31,7 +31,6 @@ export default function Home() {
     const newPosts = [...posts];
     newPosts[index] = updatedPost;
     setPosts(newPosts);
-
     localStorage.setItem("posts", JSON.stringify(newPosts));
   };
 
@@ -43,11 +42,11 @@ export default function Home() {
   }, []);
 
   let postsTorender = posts;
-
   if (searchValue !== "") {
     const filteredPosts = posts.filter((post) => {
-      return post.hashtags.includes(searchValue);
+      return post.hashtag.includes(searchValue);
     });
+    console.log(filteredPosts, "lala");
     postsTorender = filteredPosts;
   }
 
