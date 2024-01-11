@@ -7,7 +7,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         text: '',
         likes: 0,
         hashtag: '',
-        images: '',
+        image: '',
     });
 
     // Handle user input
@@ -62,7 +62,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                 text: "",
                 likes: 0,
                 hashtag: "",
-                images: ""
+                image: ""
             });
 
             // Hide Notification
@@ -140,11 +140,11 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                             <label className="font-semibold">Link</label>
                             <input
                                 onChange={handleInput}
-                                value={postObj.images}
+                                value={postObj.image}
                                 className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none 
                                             rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 md:w-full"
                                 placeholder="Add Image Link"
-                                name="images"
+                                name="image"
                             />
                         </div>
                     </div>
