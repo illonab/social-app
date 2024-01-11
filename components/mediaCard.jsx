@@ -7,7 +7,6 @@ import TimeAgo from 'timeago-react';
 import Link from "next/link";
 
 const MediaCard = ({post, onUpdatePost, index}) => {
-    console.log(index)
     const onChangeLike = (e) => {
         post.likes = post.likes + 1;
         onUpdatePost(post, index)
@@ -42,7 +41,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                     </div>
                 </div>
               
-                {/* <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p> */}
+                <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
             </div>
         </article>
 

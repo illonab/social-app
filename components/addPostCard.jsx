@@ -20,13 +20,9 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     // Get existing posts from local storage
     const getLocalPosts = () => {
         const existingPosts = JSON.parse(localStorage.getItem("posts"));
-        console.log(existingPosts, "123")
         if(!existingPosts) {
-<<<<<<< HEAD
-             return [{...postObj, hashtag: postObj.hashtag.split(" ")}]
-=======
-            return {...postObj, hashtag: postObj.hashtag.split(" ")}
->>>>>>> 0e3d3a5 (Before the bugs)
+            return [{...postObj, hashtag: postObj.hashtag.split(" ")}];
+
         }
 
         const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" ")}, ...existingPosts]

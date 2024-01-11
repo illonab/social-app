@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [posts, setPosts] = useState([
     {
-      id: 1,
       username: "Alex",
       text: "Cats, known for their graceful agility and independent demeanor, have captivated humans for centuries with their mysterious charm. From their soothing purrs to playful antics, these enigmatic feline companions continue to be beloved members of households worldwide.",
       image: "http://placekitten.com/500/500",
@@ -29,18 +28,17 @@ export default function Home() {
 
   useEffect(() => {
     const newPosts = JSON.parse(localStorage.getItem("posts"));
-    if (!newPosts) return;
-
-    setPosts([newPosts]);
+    if (newPosts){
+      setPosts(newPosts);
+    } return;
   }, []);
 
-  let postsTorender = posts;
-  console.log(postsTorender, "here");
+  let postsToRender = posts;
   if (searchValue !== "") {
     const filteredPosts = posts.filter((post) => {
-      return post.hashtag.includes(searchValue);
+      return post.hashtag ? post.hashtag.includes(searchValue) : null;
     });
-    postsTorender = filteredPosts;
+    postsToRender = filteredPosts;
   }
 
   return (
@@ -57,7 +55,7 @@ export default function Home() {
         />
       </div>
 
-      {postsTorender.map((post, index) => {
+      {postsToRender.map((post, index) => {
         return (
           <MediaCard
             post={post}
