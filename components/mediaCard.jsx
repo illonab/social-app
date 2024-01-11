@@ -25,7 +25,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
 
             </div>
 
-            <img class="rounded-t-lg" src={post.image} alt="card image" loading="lazy" width="500" height="500"/>
+            <img className="rounded-t-lg" src={post.image} alt="card image" loading="lazy" width="500" height="500"/>
 
             <div className="flex flex-col justify-center gap-4 p-6">
                 <p className="font-normal text-gray-700 dark:text-gray-400">
@@ -43,6 +43,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                         <p className="ml-2">Comments</p>
                     </div>
                 </div>
+                <p>{post.hashtags.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
             </div>
         </article>
 

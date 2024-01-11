@@ -65,7 +65,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     };
 
 
-    return (
+    return 
 
 <div className="container mx-auto">
         <div className="lg:w-4/12 pb-10 pt-5 w-full p-4 flex flex-wrap justify-center shadow-2xl my-20 rounded-md mx-auto">
@@ -158,6 +158,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                     </div>
                 </form>
             </div>
+
         </div>
     );
 };
