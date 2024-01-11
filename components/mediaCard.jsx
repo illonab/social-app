@@ -4,8 +4,10 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
+import Link from "next/link";
 
 const MediaCard = ({post, onUpdatePost, index}) => {
+    console.log(index)
     const onChangeLike = (e) => {
         post.likes = post.likes + 1;
         onUpdatePost(post, index)
@@ -34,11 +36,13 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                     </div>
                     <div className="flex">
                         <p>0</p>
-                        <p className="ml-2">Comments</p>
+                        <Link href='/comments'>
+                            <p className="ml-2">Comments</p>
+                        </Link>
                     </div>
                 </div>
               
-                <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p>
+                {/* <p>{post.hashtag.map((hash, index) => {return <span key={index}>{hash} </span> })}</p> */}
             </div>
         </article>
 
