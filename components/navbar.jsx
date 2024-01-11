@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu, AiFillRead } from 'react-icons/ai';
 
 const Navbar = () => {
   // state to manage navbar visibility
@@ -32,7 +32,12 @@ const Navbar = () => {
   return (
     <div className='bg-gray-50 border-gray-200 shadow-lg flex justify-between items-center h-20 w-full mx-auto px-4'>
     {/* Text Logo */}
-      <h1 className='w-full text-3xl font-bold ml-4 text-black'>Social<br/>App</h1>
+    <div className='flex items-center'>
+        <AiFillRead size={96} className='text-xl ml-8 mr-4' /> 
+        <h1 className='text-3xl font-bold text-black'>
+            Page<br/>Turner
+        </h1>
+    </div>
 
       {/* Desktop Navigation */}
       <ul className='hidden md:flex space-x-2'>
@@ -76,17 +81,26 @@ const Navbar = () => {
         }
       >
         {/* Mobile Logo */}
-        <h1 className='w-full text-3xl font-bold text-black m-4'>Social App</h1>
+        <div className='flex items-center'>
+          <AiFillRead size={32} className='text-md ml-4 mr-2' />
+          <h1 className='text-md md:text-xl font-bold text-black m-2'>Page Turner</h1>
+        </div>
 
         {/* Mobile Navigation Items */}
-        {navItems.map(item => (
-          <li
-            key={item.id}
-            className='p-4 border-b rounded-xl hover:bg-blue-300 duration-300 hover:text-black cursor-pointer border-gray-300'
-          >
-            {item.text}
-          </li>
-        ))}
+        <li
+          className='p-4 border-b rounded-xl hover:bg-blue-300 duration-300 hover:text-black cursor-pointer border-gray-300'
+        >
+          <Link href='/'>
+            <p onClick={handleNav}>View Posts</p>
+          </Link>
+        </li>
+        <li
+          className='p-4 border-b rounded-xl hover:bg-blue-300 duration-300 hover:text-black cursor-pointer border-gray-300'
+        >
+          <Link href='/add'>
+            <p onClick={handleNav}>Add a Post</p>
+          </Link>
+        </li>
       </ul>
     </div>
   );

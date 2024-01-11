@@ -1,109 +1,166 @@
-'use client';
-
 import { useState } from "react";
 
 // Page layout for adding post
-const AddPostCard = () => {
-   // const [posts, setPosts] = useState([]);
+const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
+    const [postObj, setPostObj] = useState({
+        username: '',
+        text: '',
+        likes: 0,
+        hashtag: '',
+        images: '',
+    });
 
-    // const [postObj, setPostObj] = useState({
-    //     "user": "",
-    //     "text": "",
-    //     "images": "",
-    //     "likes": 0,
-    // });
-
-    // Where we store user information. setPostObj is a function that resets postObj;
-    const [postObj, setPostObj] = useState({});
-
-    // When a user interacts with the page. The postObj gets updated with whatever value they inputted -> onChange
+    // Handle user input
     const handleInput = (event) => {
-        setPostObj({...postObj, [event.target.name]: event.target.value});
-    }
-    
-    // Deals with adding post to local storage
+        const { name, value } = event.target;
+
+        setPostObj({ ...postObj, [name]: value });
+    };
+
+    // Get existing posts from local storage
+    const getLocalPosts = () => {
+        const existingPosts = JSON.parse(localStorage.getItem("posts"));
+
+        return [postObj, ...existingPosts];
+    };
+
+    // Add post to local storage
     const handleAddPost = (event) => {
-        // Prevents the page from re-rendering (Error handling)
         event.preventDefault();
 
-        // Checks that the post has both a username and text/message
-        if (!postObj.username || !postObj.text) {
-            // If not it returns (Doesn't add to local)
+        // Deals with invalid inputs
+        if (!postObj.username || !postObj.text || !postObj.hashtag) {
+            // Display notification & Show invalid
+            setIsSubmit(true);
+            setIsError(true);
+
+            setTimeout(() => {
+                // Hide Notification
+                setIsSubmit(false);
+            }, 3000);
             return;
         }
 
-        // Getting the data from the local storage
-        //Ilona - Changed const to let because we are reasigning it to empty []
-        let existingPosts = JSON.parse(localStorage.getItem('posts')); // Posts is the name of the key in the local storage. So we can access
+        const posts = getLocalPosts();
 
-        //Ilona - changed return to existingPosts = [] to handle empty local storage case
-        // Error Handling: If there is no 'posts' in local storage, nothing will happen
-        if (!existingPosts) {
-            existingPosts = [];
-        }
-        
-        // Resets the PostObj, with the updated data (Line 20)
-        //Ilona - merged this logic into the posts for optimization
-        // setPostObj(() => { 
-        //     // Returns the back to postObj + with the Likes Key and 0 Value
-        //     return {...postObj, likes: 0}
-        // });
+        localStorage.setItem("posts", JSON.stringify(posts));
 
-        // Concats the existing post with the new post
-        const posts = [...existingPosts, {...postObj, likes: 0, hashtags: postObj.hashtags.split(" ")}];
+        // Show Notification as Added
+        setIsSubmit(true);
+        setIsError(false);
 
-        // Update Local storage with the existing and new post
-        localStorage.setItem('posts', JSON.stringify(posts));
-    }
+        setTimeout(() => {
+            // Reset Post
+            setPostObj({
+                username: "",
+                text: "",
+                likes: 0,
+                hashtag: "",
+                images: ""
+            });
 
-    return (
-        <div className="border-2 border-black w-2/4 h-2/4 rounded-lg p-4">
-            <form onSubmit={handleAddPost} className="flex flex-col items-center justify-center gap-4">
-                {/* User Id */}
-                <div className=" w-full h-24 flex">
-                    <div  className="flex items-center justify-center w-1/6">
-                    <div className="rounded-full border-2 border-black h-16 w-16 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 18">
-                            <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                        </svg>
-                    </div>  
+            // Hide Notification
+            setIsSubmit(false);
+        }, 3000)
+    };
+
+
+    return 
+
+<div className="container mx-auto">
+        <div className="lg:w-4/12 pb-10 pt-5 w-full p-4 flex flex-wrap justify-center shadow-2xl my-20 rounded-md mx-auto">
+            <div className="pb-5">
+                <h1 className="text-3xl text-center font-bold">Add Yours</h1>
+                <p className="text-center text-xl">Add your book review favourite quote etc</p>
+            </div>
+            <form onSubmit={handleAddPost} className="flex flex-col justify-start items-center w-full m-auto">
+    
+                    {/* User Id */}
+                    <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+                        <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
+                            <label className="font-semibold">Username</label>
+                            <div className="flex items-center">
+                                <input
+                                    onChange={handleInput}
+                                    value={postObj.username}
+                                    className="border border-gray-300 text-sm font-semibold mb-1 max-w-full 
+                                               w-full outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 
+                                               focus:border-blue-500 md:w-full"
+                                    type="text"
+                                    placeholder="Enter your username"
+                                    name="username"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <input onChange={handleInput} className='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md' placeholder='Enter your username' name="username"/>
-                </div>
 
-                {/* Text */}
-                <div className=" w-full h-24 flex ">
-                    <div className="flex items-center justify-center w-1/6">
-                        <h2 className='font-bold'>Text: </h2>
+                    {/* Text */}
+                    <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+                        <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
+                            <label className="font-semibold">Text</label>
+                            <input
+                                onChange={handleInput}
+                                value={postObj.text}
+                                className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full 
+                                            outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 
+                                            focus:border-blue-500 md:w-full"
+                                type="textarea"
+                                placeholder="Add your message"
+                                name="text"
+                            />
+                        </div>
                     </div>
-                    <input onChange={handleInput} className='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4 rounded-md'  type="textarea" placeholder='Add your message' name="text" />
-                </div>
 
-                {/* Images */}
-                <div className=" w-full h-24 flex">
-                    <div className="flex items-center justify-center w-1/6">
-                        <h2 className='font-bold'>Link: </h2>
+                    {/* # */}
+                    <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+                        <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
+                            <label className="font-semibold">Add #</label>
+                            <input
+                                onChange={handleInput}
+                                value={postObj.hashtag}
+                                className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full 
+                                            outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 
+                                            focus:border-blue-500 md:w-full"
+                                type="textarea"
+                                placeholder="Add your hashtag"
+                                name="hashtag"
+                            />
+                        </div>
                     </div>
-                    <input onChange={handleInput} className='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4' placeholder='Add Image Link' name="images" />
-                </div>
 
-                {/* Hashtags */}
-                <div className="w-full h-24 flex">
-                    <div className="flex items-center justify-center w-1/6">
-                        <h2 className='font-bold'>Hashtags: </h2>
+                    {/* Images */}
+                    <div className="grid grid-cols-1 mb-6 md:grid-cols-2 gap-3 w-full">
+                        <div className="text-left flex flex-col gap-2 w-full md:col-span-2">
+                            <label className="font-semibold">Link</label>
+                            <input
+                                onChange={handleInput}
+                                value={postObj.images}
+                                className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full outline-none 
+                                            rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 focus:border-blue-500 md:w-full"
+                                placeholder="Add Image Link"
+                                name="images"
+                            />
+                        </div>
                     </div>
-                    <input onChange={handleInput} className='w-3/4 h-23 border-black border-2 pl-2 hover:border-sky-700 hover:border-4' placeholder='Add hashtags' name="hashtags" />
-                </div>
 
-                {/* Submit Button */}
-                <div className='w-full h-24 relative'>
-                    <button type='submit' className='absolute right-10 top-5 border-black border-2 h-16 w-28 rounded-lg hover:bg-black hover:text-white'>Post</button>
-                </div>
+                    {/* Submit Button */}
+                    <div className="w-full text-left">
+                    <button
+                        type="submit"
+                        className={`flex justify-center items-center gap-2 w-full py-3 px-4 text-white text-md font-bold border 
+                                    rounded-md ease-in-out duration-150 shadow-slate-600 lg:m-0 md:px-6
+                                    ${isSubmit ? !isError ? 'bg-green-500' : 'bg-red-500' : 'bg-blue-500 hover:bg-white hover:text-blue-500'}`}
+                        style={{ pointerEvents: isSubmit ? 'none' : 'auto' }}
+                        title="Post"
+                    >
+                        Post
+                    </button>
+                    </div>
+                </form>
+            </div>
 
-
-            </form>
         </div>
-    )
-}
+    );
+};
 
 export default AddPostCard;
