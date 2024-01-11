@@ -35,13 +35,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const posts = JSON.parse(localStorage.getItem("posts"));
-    if (!posts) return;
+    const newPosts = JSON.parse(localStorage.getItem("posts"));
+    if (!newPosts) return;
 
-    setPosts(posts);
+    setPosts([newPosts]);
   }, []);
 
   let postsTorender = posts;
+  console.log(postsTorender, "here");
   if (searchValue !== "") {
     const filteredPosts = posts.filter((post) => {
       return post.hashtag.includes(searchValue);

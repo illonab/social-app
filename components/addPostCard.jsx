@@ -20,10 +20,9 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     // Get existing posts from local storage
     const getLocalPosts = () => {
         const existingPosts = JSON.parse(localStorage.getItem("posts"));
+        console.log(existingPosts, "123")
         if(!existingPosts) {
-             localStorage.setItem("posts", JSON.stringify({...postObj, hashtag: postObj.hashtag.split(" ")}));
-             console.log(JSON.stringify({...postObj, hashtag: postObj.hashtag.split(" ")}))
-             return
+             return [{...postObj, hashtag: postObj.hashtag.split(" ")}]
         }
         return [{...postObj, hashtag: postObj.hashtag.split(" ")}, ...existingPosts];
     };
