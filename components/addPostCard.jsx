@@ -6,7 +6,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         uid: 1,
         username: '',
         booktitle: '', 
-        text: '',
+        review: '',
         likes: 0,
         hashtag: '',
         image: '',
@@ -30,11 +30,8 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         }
 
         // Get UID
-        const getUid = JSON.parse(localStorage.getItem('id')) || 0;
         const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle}, ...existingPosts] //added booktitle
 
-
- 
         return allPosts;
     };
 
@@ -69,12 +66,12 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         setTimeout(() => {
             // Reset Post
             setPostObj({
-                username: "",
-                text: "",
+                username: '',
+                booktitle: '', 
+                review: '',
                 likes: 0,
-                hashtag: "",
-                image: "",
-                booktitle: "",
+                hashtag: '',
+                image: '',
             });
 
             // Hide Notification
@@ -138,7 +135,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                             <label className="font-semibold">Review</label>
                             <textarea
                                 onChange={handleInput}
-                                value={postObj.text}
+                                value={postObj.review}
                                 className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full 
                                             outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 
                                             focus:border-blue-500 md:w-full"
