@@ -14,11 +14,12 @@ const CommentPage = () => {
     setAddLike(false);
   }, [addComment, addLike]);
 
-  // Get all posts
-  let allPosts;
-  if (typeof window !== "undefined") {
-    allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+  if (typeof window === "undefined") {
+    return null;
   }
+
+  // Get all posts
+  const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
 
   const getOriginalPost = (allPosts) => {
     const currentPostId = localStorage.getItem("current-post");
