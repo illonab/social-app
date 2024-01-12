@@ -37,12 +37,12 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                     </p>
 
                     {/* Text */}
-                    <p className="text-sm md:text-base text-gray-700 dark:text-gray-400">
+                    <p className="text-sm md:text-base pb-3 text-gray-700 dark:text-gray-400">
                         {post.review}
                     </p>
                 </div>
 
-                <div className="flex flex-col mt-4 md:mt-0">
+                <div className="flex flex-col mt-4 py-1 md:mt-0">
                     {/* Likes and Comments */}
                     <div className="flex justify-between items-center">
                         <div className="flex cursor-pointer" onClick={onChangeLike}>
@@ -52,8 +52,8 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                             <p className="ml-2">{post.likes}</p>
                         </div>
                         <div onClick={onCommentClick} className="flex items-center">
-                            <Link href="/comments">
-                            <p>{post.commentsTotal}</p>
+                            <Link href="/comments" className="flex items-center">
+                            <p className="pr-2">{post.commentsTotal}</p>
                             <p className="ml-2">Comments</p>
                         </Link>
                         </div>
