@@ -38,7 +38,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
 
                     {/* Text */}
                     <p className="text-sm md:text-base text-gray-700 dark:text-gray-400">
-                        {post.text}
+                        {post.review}
                     </p>
                 </div>
 
