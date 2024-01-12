@@ -29,8 +29,10 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
 
         }
 
+        const uid = parseInt(localStorage.getItem('id'));
+
         // Get UID
-        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle}, ...existingPosts] //added booktitle
+        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle, uid: uid}, ...existingPosts] //added booktitle
 
         return allPosts;
     };
@@ -40,7 +42,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         event.preventDefault();
 
         // Deals with invalid inputs
-        if (!postObj.username || !postObj.text || !postObj.hashtag || !postObj.booktitle) {
+        if (!postObj.username || !postObj.hashtag || !postObj.booktitle || !postObj.review) {
             // Display notification & Show invalid
             setIsSubmit(true);
             setIsError(true);
@@ -72,6 +74,8 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                 likes: 0,
                 hashtag: '',
                 image: '',
+                commentsTotal: 0,
+                comments: []
             });
 
             // Hide Notification
@@ -141,7 +145,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                                             focus:border-blue-500 md:w-full"
                                 type="textarea"
                                 placeholder="How was it?"
-                                name="text"
+                                name="review"
                                 row="5"
                             />
                         </div>
