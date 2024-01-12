@@ -15,8 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-      <BgImg />  
+      <body className={`bg-cover bg-center h-full z-[-1] bg-[url('/bg1.png')] ${inter.className}`}>
         <Navbar />
         {children}
         <Footer />

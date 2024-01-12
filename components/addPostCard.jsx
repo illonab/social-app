@@ -77,7 +77,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     return (
 
 <div className="flex container mx-auto py-10 mb-10 min-h-screen font-serif"> 
-        <div className="rounded-lg border border-gray-200 lg:w-5/12 md:w-10/12 sm:w-full p-4 flex flex-wrap justify-center shadow-2xl mb-20 mx-auto">
+        <div className="rounded-lg border border-gray-200 lg:w-5/12 md:w-10/12 sm:w-full p-4 flex flex-wrap justify-center shadow-2xl mb-20 mx-auto bg-white">
             <div className="pb-3">
                 <h1 className="text-3xl text-center font-serif font-bold py-6">Add to Your Shelf</h1>
                 <p className="text-center text-xl font-serif pb-4">Share your review, turn a page.</p>
