@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 // Page for displaying post
 export default function Home() {
-  const [posts, setPosts] = useState([  ]);
+  const [posts, setPosts] = useState([]);
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -44,7 +44,10 @@ export default function Home() {
   return (
     <main className="flex flex-col gap-20 justify-center w-screen py-20 items-center">
       <div className="flex flex-col items-center gap-5 w-1/2">
-        <label htmlFor="search" className="block font-serif text-2xl font-bold leading-6 text-nowrap">
+        <label
+          htmlFor="search"
+          className="block font-serif text-2xl font-bold leading-6 text-nowrap"
+        >
           Search the library
         </label>
         <input

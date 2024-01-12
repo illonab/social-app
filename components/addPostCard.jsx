@@ -11,7 +11,8 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         hashtag: '',
         image: '',
         commentsTotal: 0,
-        comments: []
+        comments: [],
+        time: ""
     });
 
     // Handle user input
@@ -24,15 +25,16 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     // Get existing posts from local storage
     const getLocalPosts = () => {
         const existingPosts = JSON.parse(localStorage.getItem("posts"));
+        const time = new Date().toISOString();
         if(!existingPosts) {
-            return [{...postObj, hashtag: postObj.hashtag.split(" ")}];
+            return [{...postObj, hashtag: postObj.hashtag.split(" "), time: time}];
 
         }
 
         const uid = parseInt(localStorage.getItem('id'));
 
         // Get UID
-        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle, uid: uid}, ...existingPosts] //added booktitle
+        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), time: time, booktitle: postObj.booktitle, uid: uid}, ...existingPosts] //added booktitle
 
         return allPosts;
     };
@@ -75,7 +77,8 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                 hashtag: '',
                 image: '',
                 commentsTotal: 0,
-                comments: []
+                comments: [],
+                time: ""
             });
 
             // Hide Notification
