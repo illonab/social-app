@@ -86,7 +86,6 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         }, 3000)
     };
 
-//added book field and copy updates
     return (
 
 <div className="flex container mx-auto py-10 mb-10 min-h-screen font-serif"> 

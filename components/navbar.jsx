@@ -32,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='bg-gray-50 border-gray-200 sticky absolute top-0 shadow-lg flex justify-between items-center h-20 w-full mx-auto px-4'>
+    <div className='bg-gray-50 border-gray-200 sticky z-10 top-0 shadow-lg flex justify-between items-center h-20 w-full mx-auto px-4'>
     {/* Text Logo */}
     <div className='flex items-center'>
         <GiBookshelf size={84} className='text-xl ml-8 mr-2' /> 

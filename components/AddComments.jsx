@@ -57,24 +57,41 @@ const AddComment = ({setAddComment}) => {
   
 
   return (
-    <div className="h-1/4 w-2/4 rounded-lg shadow-lg p-2">
 
-      <form onSubmit={handleAddComment} className="w-full h-full rounded-lg shadow-lg">
-        <h1>Add Comment</h1>
-        <div className="flex flex-col gap-4 h-3/4 w-3/5 p-4">
-          <div className="flex flex-col border-2 border-black rounded-md">
-            <label>Username</label>
-            <input onChange={handleUserInput} type="text" placeholder="Add Username" value={commentObj.user} name="user"/>
+    <div className="rounded-lg border border-gray-200 bg-white font-serif shadow-md max-w-2xl mx-auto md:w-2/3 lg:w-3/4 xl:w-4/5 mb-10 pb-16 p-4">
+
+      <form onSubmit={handleAddComment} className="flex flex-col justify-between w-full">
+      <div className="flex items-center mb-2">
+          <h1 className="text-lg font-bold text-black dark:text-gray-700 ">Add Comment</h1>
+        </div>
+        <div className="flex flex-col mb-4">
+          <label className="inline-block my-2 align-middle font-semibold">Username</label>
+          <input
+            onChange={handleUserInput}
+            type="text"
+            placeholder="Add Username"
+            value={commentObj.user}
+            name="user"
+            className="p-2 rounded-md border focus:outline-none focus:border-blue-500"
+          />
           </div>
 
-          <div className="flex flex-col border-2 border-black rounded-md">
-            <label>Add Comment</label>
-            <input onChange={handleUserInput} type="textarea" placeholder="Enter your comment" value={commentObj.comment} name="comment" required/>
-          </div>
+      <div className="flex flex-col mb-4">
+          <label className="inline-block my-2 align-middle font-semibold">Add Comment</label>
+          <textarea
+            onChange={handleUserInput}
+            type="textarea"
+            placeholder="Enter your comment"
+            value={commentObj.comment}
+            name="comment"
+            required
+            className="p-2 w-full rounded-md border focus:outline-none focus:border-blue-500"
+          />
         </div>
 
-        <div className="w-full flex justify-center items-center">
-          <button type="submit" className="bg-blue-500 font-bold">Submit Comment</button>
+        <div className="w-full text-left">
+          <button type="submit" className="flex justify-center items-center gap-2 w-full py-2 px-4 text-white text-md font-bold border 
+                      rounded-md ease-in-out duration-150 shadow-slate-600 md:px-6 bg-blue-500 hover:bg-white hover:text-blue-500">Submit Comment</button>
         </div>
       </form>
     </div>
