@@ -3,12 +3,15 @@ import { useState } from "react";
 // Page layout for adding post
 const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     const [postObj, setPostObj] = useState({
+        uid: 1,
         username: '',
-        booktitle: '', // added booktitle
+        booktitle: '', 
         text: '',
         likes: 0,
         hashtag: '',
         image: '',
+        commentsTotal: 0,
+        comments: []
     });
 
     // Handle user input
@@ -26,7 +29,10 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
 
         }
 
+        // Get UID
+        const getUid = JSON.parse(localStorage.getItem('id')) || 0;
         const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle}, ...existingPosts] //added booktitle
+
 
  
         return allPosts;
@@ -49,8 +55,11 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
             return;
         }
 
+        // Get all posts on local storage
         const posts = getLocalPosts();
 
+        // Update Local Storage
+        localStorage.setItem('id', posts.length + 1);
         localStorage.setItem("posts", JSON.stringify(posts));
 
         // Show Notification as Added

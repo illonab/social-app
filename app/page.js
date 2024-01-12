@@ -1,6 +1,8 @@
 "use client";
-import MediaCard from "@/components/mediaCard";
+
+import MediaCard from "/components/mediaCard";
 import { useState, useEffect } from "react";
+
 // Page for displaying post
 export default function Home() {
   const [posts, setPosts] = useState([

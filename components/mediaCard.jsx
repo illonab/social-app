@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import TimeAgo from 'timeago-react';
-import Link from "next/link";
+import Link from 'next/link';
 
 const MediaCard = ({post, onUpdatePost, index}) => {
     const onChangeLike = (e) => {
@@ -12,7 +12,11 @@ const MediaCard = ({post, onUpdatePost, index}) => {
         onUpdatePost(post, index)
     }
 
-    //changed sizing and layout
+    const onCommentClick = (e) => {
+        localStorage.setItem("current-post", post.uid);
+    }
+
+
     return (
         <article className="rounded-lg border border-gray-200 bg-white shadow-md max-w-2xl mx-auto md:w-2/3 lg:w-3/4 xl:w-4/5 flex flex-col md:flex-row">
             {/* Image Section */}
@@ -48,11 +52,11 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                             </svg>
                             <p className="ml-2">{post.likes}</p>
                         </div>
-                        <div className="flex items-center">
-                            <p className="text-sm md:text-base mr-2">0</p>
-                            <Link href='/comments'>
-                                <p className="text-sm md:text-base">Comments</p>
-                            </Link>
+                        <div onClick={onCommentClick} className="flex items-center">
+                            <Link href="/comments">
+                            <p>{post.commentsTotal}</p>
+                            <p className="ml-2">Comments</p>
+                        </Link>
                         </div>
                     </div>
 
