@@ -12,6 +12,10 @@ const MediaCard = ({post, onUpdatePost, index}) => {
         onUpdatePost(post, index)
     }
 
+    const onCommentClick = (e) => {
+        localStorage.setItem("current-post", post.uid);
+    }
+
     return (
         <article className=" rounded-lg border border-gray-200 bg-white shadow-md  max-w-lg">
             <div className="flex items-center p-6">
@@ -33,9 +37,9 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                         </svg>
                         <p className="ml-2">{post.likes}</p>
                     </div>
-                    <div className="flex">
+                    <div onClick={onCommentClick} className="flex">
                         <Link href="/comments">
-                            <p>0</p>
+                            <p>{post.commentsTotal}</p>
                             <p className="ml-2">Comments</p>
                         </Link>
                     </div>

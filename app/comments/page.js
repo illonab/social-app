@@ -1,63 +1,57 @@
 'use client'
-import React, { useState } from 'react';
-import Comment from "/components/comments"; 
-import MediaCard from "/components/MediaCard"
+
+import React, { useEffect, useState } from 'react';
+import AddComment from "@/components/AddComments"; 
+import MediaCard from "@/components/mediaCard"
+import CommentCard from '@/components/CommentCard';
 
 const CommentPage = () => {
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
 
-  const onAddComment = () => {
-    if (newComment.trim() !== '') {
-      const updatedComments = [...comments, newComment];
-      setComments(updatedComments);
-      setNewComment('');
-    }
-  };
+  const [addComment, setAddComment] = useState(false);
+  const [addLike, setAddLike] = useState(false);
+
+  useEffect(() => {
+    setAddComment(false);
+    setAddLike(false);
+  }, [addComment, addLike])
+
+  // Get all posts
+  const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+
+  const getOriginalPost = (allPosts) => {
+    const currentPostId = localStorage.getItem("current-post");
+
+    return allPosts.find((post) => post.uid === parseInt(currentPostId));
+  }
+
+  const onUpdatePost = () => {
+    localStorage.setItem("posts", JSON.stringify([...allPosts]));
+    setAddLike(true);
+  };  
+
+  // Current Post
+  const currentPost = getOriginalPost(allPosts);
 
   return (
-    <div className="container mx-auto mt-8 p-4">
-      <header className="text-2xl font-bold mb-4">Comment Page</header>
+    <main>
+      <div className="w-full h-full flex flex-col justify-center items-center my-10 gap-4">
+        <MediaCard post={currentPost} onUpdatePost={onUpdatePost} />
 
-      {/* Existing Comments Section */}
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Existing Comments:</h2>
-        {comments.length > 0 ? (
-          comments.map((comment, index) => (
-            <div key={index} className="mb-2">
-              {comment}
-            </div>
-          ))
-        ) : (
-          <p>No comments yet.</p>
-        )}
+        <div className="flex flex-col w-3/4 gap-4 items-center justify-center">
+          {currentPost.comments.map((comment, index) => {
+            return (
+              <CommentCard 
+                key={index}
+                username={comment.username}
+                comment={comment.comment}
+              />
+            )
+          })}
+        </div>
+
+        <AddComment setAddComment={setAddComment} />
       </div>
-
-      {/* Add New Comment Form */}
-      <div>
-        <h2 className="text-lg font-semibold mb-2">Add a New Comment:</h2>
-        <form className="flex items-center" onSubmit={onAddComment}>
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Type your comment here..."
-            className="mr-2 p-2 border border-gray-300 rounded-md"
-          />
-          <button
-            type="button"
-            onClick={onAddComment}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
-          >
-            Add Comment
-          </button>
-        </form>
-      </div>
-
-      {/* Comment Component */}
-      <Comment comments={comments} onUpdatePost={() => {}} />
-
-    </div>
+    </main>
   );
 };
 

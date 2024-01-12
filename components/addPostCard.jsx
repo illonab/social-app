@@ -9,6 +9,8 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         likes: 0,
         hashtag: '',
         image: '',
+        commentsTotal: 0,
+        comments: []
     });
 
     // Handle user input
@@ -25,15 +27,9 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
             return [{...postObj, hashtag: postObj.hashtag.split(" ")}];
 
         }
-
         // Get UID
         const getUid = JSON.parse(localStorage.getItem('id')) || 0;
         const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), uid: getUid }, ...existingPosts]
-
-        // Update UID
-        const updateUid = getUid + 1;
-        localStorage.setItem('id', updateUid);
-
 
         return allPosts;
     };
@@ -55,8 +51,11 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
             return;
         }
 
+        // Get all posts on local storage
         const posts = getLocalPosts();
 
+        // Update Local Storage
+        localStorage.setItem('id', posts.length + 1);
         localStorage.setItem("posts", JSON.stringify(posts));
 
         // Show Notification as Added

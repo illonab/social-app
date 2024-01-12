@@ -1,6 +1,8 @@
 "use client";
-import MediaCard from "@/components/mediaCard";
+
+import MediaCard from "/components/mediaCard";
 import { useState, useEffect } from "react";
+
 // Page for displaying post
 export default function Home() {
   const [posts, setPosts] = useState([
@@ -12,9 +14,6 @@ export default function Home() {
       likes: 0,
     },
   ]);
-
-  // Add uid number to local storage
-  localStorage.setItem("id", 2);
 
   const [searchValue, setSearchValue] = useState("");
 
