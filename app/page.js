@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [posts, setPosts] = useState([
     {
-      username: "Alex",
-      text: "Cats, known for their graceful agility and independent demeanor, have captivated humans for centuries with their mysterious charm. From their soothing purrs to playful antics, these enigmatic feline companions continue to be beloved members of households worldwide.",
-      image: "http://placekitten.com/500/500",
-      hashtag: ["#cats", "#lovacats"],
+      username: "Neil Gaiman",
+      text: "In his afterword, King states that he wanted the stories to linger in the imagination. And they do. They linger, and perhaps sometimes they even fester. But they are never less than satisfying and are fine stories to take with us into the night.",
+      image: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1524583257l/7912007._SY475_.jpg",
+      hashtag: ["#horror", "#novel, #stephenking"],
       likes: 0,
+      booktitle: "Full Dark, No Stars", // Added bookTitle updated content
     },
   ]);
 
@@ -46,11 +47,12 @@ export default function Home() {
     );
   }
 
+  // size and copy update
   return (
     <main className="flex flex-col gap-20 justify-center w-screen py-20 items-center">
-      <div className="flex flex-col items-center gap-5 w-full">
-        <label htmlFor="search" className="block text-xl font-medium leading-6">
-          Search post
+      <div className="flex flex-col items-center gap-5 w-1/2">
+        <label htmlFor="search" className="block font-serif text-2xl font-bold leading-6 text-nowrap">
+          Search the library
         </label>
         <input
           onChange={handleSearchValue}
