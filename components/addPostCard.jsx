@@ -3,12 +3,16 @@ import { useState } from "react";
 // Page layout for adding post
 const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     const [postObj, setPostObj] = useState({
+        uid: 1,
         username: '',
-        booktitle: '', // added booktitle
-        text: '',
+        booktitle: '', 
+        review: '',
         likes: 0,
         hashtag: '',
         image: '',
+        commentsTotal: 0,
+        comments: [],
+        time: ""
     });
 
     // Handle user input
@@ -21,14 +25,17 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
     // Get existing posts from local storage
     const getLocalPosts = () => {
         const existingPosts = JSON.parse(localStorage.getItem("posts"));
+        const time = new Date().toISOString();
         if(!existingPosts) {
-            return [{...postObj, hashtag: postObj.hashtag.split(" ")}];
+            return [{...postObj, hashtag: postObj.hashtag.split(" "), time: time}];
 
         }
 
-        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), booktitle: postObj.booktitle}, ...existingPosts] //added booktitle
+        const uid = parseInt(localStorage.getItem('id'));
 
- 
+        // Get UID
+        const allPosts = [{...postObj, hashtag: postObj.hashtag.split(" "), time: time, booktitle: postObj.booktitle, uid: uid}, ...existingPosts] //added booktitle
+
         return allPosts;
     };
 
@@ -37,7 +44,7 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         event.preventDefault();
 
         // Deals with invalid inputs
-        if (!postObj.username || !postObj.text || !postObj.hashtag || !postObj.booktitle) {
+        if (!postObj.username || !postObj.hashtag || !postObj.booktitle || !postObj.review) {
             // Display notification & Show invalid
             setIsSubmit(true);
             setIsError(true);
@@ -49,8 +56,11 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
             return;
         }
 
+        // Get all posts on local storage
         const posts = getLocalPosts();
 
+        // Update Local Storage
+        localStorage.setItem('id', posts.length + 1);
         localStorage.setItem("posts", JSON.stringify(posts));
 
         // Show Notification as Added
@@ -60,12 +70,15 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         setTimeout(() => {
             // Reset Post
             setPostObj({
-                username: "",
-                text: "",
+                username: '',
+                booktitle: '', 
+                review: '',
                 likes: 0,
-                hashtag: "",
-                image: "",
-                booktitle: "",
+                hashtag: '',
+                image: '',
+                commentsTotal: 0,
+                comments: [],
+                time: ""
             });
 
             // Hide Notification
@@ -73,7 +86,6 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
         }, 3000)
     };
 
-//added book field and copy updates
     return (
 
 <div className="flex container mx-auto py-10 mb-10 min-h-screen font-serif"> 
@@ -129,13 +141,13 @@ const AddPostCard = ({setIsError, setIsSubmit, isError, isSubmit}) => {
                             <label className="font-semibold">Review</label>
                             <textarea
                                 onChange={handleInput}
-                                value={postObj.text}
+                                value={postObj.review}
                                 className="border border-gray-300 text-sm font-semibold mb-1 max-w-full w-full 
                                             outline-none rounded-md m-0 py-3 px-4 md:py-3 md:px-4 md:mb-0 
                                             focus:border-blue-500 md:w-full"
                                 type="textarea"
                                 placeholder="How was it?"
-                                name="text"
+                                name="review"
                                 row="5"
                             />
                         </div>
