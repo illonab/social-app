@@ -28,17 +28,22 @@ export default function Home() {
 
   useEffect(() => {
     const newPosts = JSON.parse(localStorage.getItem("posts"));
-    if (newPosts){
-      setPosts(newPosts);
-    } return;
+    if (!newPosts) {
+      return;
+    }
+
+    setPosts(newPosts);
   }, []);
 
   let postsToRender = posts;
   if (searchValue !== "") {
-    const filteredPosts = posts.filter((post) => {
-      return post.hashtag ? post.hashtag.includes(searchValue) : null;
-    });
-    postsToRender = filteredPosts;
+    const normaziledSearchValue = searchValue.trim();
+
+    postsToRender = posts.filter((post) =>
+      (post.hashtag || []).some((hashtagItem) =>
+        hashtagItem.includes(normaziledSearchValue)
+      )
+    );
   }
 
   return (
