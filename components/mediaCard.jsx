@@ -6,6 +6,7 @@ import TimeAgo from 'timeago-react';
 import Link from 'next/link';
 
 const MediaCard = ({post, onUpdatePost, index}) => {
+
     const onChangeLike = (e) => {
         post.likes = post.likes + 1;
         onUpdatePost(post, index)
@@ -29,7 +30,7 @@ const MediaCard = ({post, onUpdatePost, index}) => {
                 {/* Username Section */}
                 <div className="flex items-center mb-2">
                  <p className="text-lg font-bold text-black dark:text-gray-700">{post.username}</p>
-                <TimeAgo datetime={new Date().toISOString()} opts={{ minInterval: 60 }} className="block text-sm font-normal leading-none text-gray-400 dark:text-gray-500 ml-2" />
+                <TimeAgo datetime={post.time} opts={{ minInterval: 60 }} className="block text-sm font-normal leading-none text-gray-400 dark:text-gray-500 ml-2" />
                 </div>
                     {/* Book Title */}
                     <p className="text-lg font-bold text-black dark:text-gray-700 mb-2">
